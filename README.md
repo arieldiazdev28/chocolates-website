@@ -4,10 +4,9 @@
 
 Antes de clonar y configurar el proyecto, asegúrate de tener instalados los siguientes requisitos:
 
-- **PHP** (>= 8.0)
+- **WampServer** (PHP, Apache y MySQL)
 - **Composer** (Administrador de dependencias de PHP)
 - **Laravel** (Se puede instalar con Composer)
-- **WampServer** (Base de datos)
 - **Node.js y npm** (Para manejar assets con Vite)
 - **Git** (Para clonar el repositorio)
 
