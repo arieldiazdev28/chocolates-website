@@ -15,7 +15,7 @@ Antes de clonar y configurar el proyecto, asegúrate de tener instalados los sig
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/usuario/proyecto-laravel.git
+git clone https://github.com/arieldiazdev28/chocolates-website.git
 cd chocolates-website
 ```
 
