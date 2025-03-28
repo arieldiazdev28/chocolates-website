@@ -7,7 +7,7 @@ Antes de clonar y configurar el proyecto, asegúrate de tener instalados los sig
 - **PHP** (>= 8.0)
 - **Composer** (Administrador de dependencias de PHP)
 - **Laravel** (Se puede instalar con Composer)
-- **MySQL** (Base de datos)
+- **WampServer** (Base de datos)
 - **Node.js y npm** (Para manejar assets con Vite)
 - **Git** (Para clonar el repositorio)
 
