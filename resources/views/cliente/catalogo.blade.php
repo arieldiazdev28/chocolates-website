@@ -1,0 +1,1 @@
+<!-- La página principal donde los clientes pueden ver el catálogo de productos.-->

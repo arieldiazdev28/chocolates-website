@@ -1,0 +1,1 @@
+<!-- Vista para ver los productos seleccionados por el cliente antes de proceder al checkout. -->
