@@ -19,18 +19,26 @@
 }
 
 @layer components {
-    .contenedor-icono {
-        @apply flex justify-center items-center w-8 h-8 bg-lavanda rounded-full;
+    .wrapper {
+        @apply w-[90%] mx-auto overflow-hidden max-w-screen-xl;
     }
+    
+    .contenedor-icono {
+        @apply flex justify-center items-center w-8 h-8 bg-lavanda rounded-full hover:bg-rosa;
+    }
+
 }
 
 @layer utilities {
     .enlace-activo {
-        text-decoration: underline;
-        font-weight: bold;
+        @apply underline font-bold;
     }
 
     .color-icono-banner {
         @apply text-grisClaro text-xl;
+    }
+
+    .hover-icono {
+        @apply hover:scale-110 hover:rotate-8 hover:shadow-2xl transition-all duration-200 ease-in-out;
     }
 }
