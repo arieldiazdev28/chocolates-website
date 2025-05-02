@@ -13,7 +13,7 @@
     {{-- Importar Boxicons --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<body>
+<body class="min-h-screen flex flex-col text-gray-900">
     {{-- Encabezado de la página web --}}
     <header class="bg-grisClaro">
         <!-- Banner superior-->
@@ -25,58 +25,37 @@
             <!-- Menú de búsqueda y carrito de compras-->
             <div class="hidden md:flex items-center gap-4">
                 <x-form.search-input />
-                <a href="/carrito"><i class="fa-solid fa-cart-shopping text-2xl text-rosa hover-icono hover:opacity-80 "></i></a>
+                <a href="{{ route('carrito.index') }}"><i class="fa-solid fa-cart-shopping text-2xl text-rosa hover-icono hover:opacity-80 "></i></a>
                 
             </div>
         </div>
         <!-- Menú de navegación -->
         <nav class="bg-grisClaro pb-2 hidden md:block">
             <ul class="flex flex-col justify-center items-center gap-3 md:flex-row">
-                <li><a href="/" class="enlace-activo">HOME</a></li>
+                <li><a href="{{ route('home.index') }}" class="enlace-activo">HOME</a></li>
                 <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="/catalogo">CATÁLOGO</a></li>
+                <li><a href="{{ route('productos.index') }}">CATÁLOGO</a></li>
                 <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="/nosotros">NOSOTROS</a></li>
+                <li><a href="{{ route('nosotros.index') }}">NOSOTROS</a></li>
                 <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="/faq">FAQ</a></li>
+                <li><a href="{{ route('faq.index') }}">FAQ</a></li>
                 <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="/contacto">CONTACTO</a></li>
+                <li><a href="{{ route('contacto.index') }}">CONTACTO</a></li>
             </ul>
         </nav>
-        <!-- Fin del banner superior-->
-
-        <!-- Menú de navegación para dispositivos móviles-->
-        {{-- <nav x-data="{ open: false }" class="wrapper flex items-center justify-between px-6 py-4 md:py-0">
-            <a href="#" class="w-[25%] max-w-[140px] md:hidden">
-                <img src="{{ asset('images/chocolates_logo.png') }}" alt="Logo de Chocolates" loading="lazy" class="w-full">
-            </a>
-
-            <!-- Botón del menú hamburguesa -->
-            <button @click="open = !open" class="md:hidden text-3xl focus:outline-none">
-                <i class="fa-solid fa-bars" x-show="!open"></i>
-                <i class="fa-solid fa-times" x-show="open"></i>
-            </button>
-
-            <!-- Menú de navegación -->
-            <ul x-show="open" @click.away="open = false" class="absolute top-16 left-0 w-full bg-white shadow-lg md:static" x-transition>
-                <li><a href="#" class="block py-3 px-6 hover:bg-rosa md:hover:bg-transparent">HOME</a></li>
-                <li><a href="#" class="block py-3 px-6 hover:bg-rosa md:hover:bg-transparent">CATÁLOGO</a></li>
-                <li><a href="#" class="block py-3 px-6 hover:bg-rosa md:hover:bg-transparent">NOSOTROS</a></li>
-                <li><a href="#" class="block py-3 px-6 hover:bg-rosa md:hover:bg-transparent">FAQ</a></li>
-                <li><a href="#" class="block py-3 px-6 hover:bg-rosa md:hover:bg-transparent">CONTACTO</a></li>
-            </ul>
-        </nav> --}}
     </header>
 
     {{-- Contenedor donde se muestra el contenido dinámico de la página web --}}
-    <main class="container">
-        {{ $slot }}
+    <main class="flex-1">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            {{ $slot }}
+        </div>
     </main>
 
     
     {{-- Pie de página --}}
-    <footer>
-        <a href="/dashboard">Entrar al modo administrador</a>
+    <footer class="bg-lavanda text-center py-4">
+        <a href="#">&copy; {{ date('Y') }} Chocolates. Todos los derechos reservados.</a>
     </footer>
 </body>
 </html>
