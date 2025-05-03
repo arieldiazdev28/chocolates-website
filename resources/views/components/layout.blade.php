@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Chocolates | {{ $title ?? 'Home' }}</title>
     {{-- Importar Tailwind --}}
     @vite('resources/css/app.css')
+    {{-- Importar el archivo de notificaciones personalizadas --}}
+    @vite('resources/css/notifications.css')
     {{-- Importar Alpine.js --}}
     @vite('resources/js/app.js')
     {{-- Importar font-awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- Importar Boxicons --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {{-- Importar Sweet Alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="min-h-screen flex flex-col text-gray-900">
     {{-- Encabezado de la página web --}}
@@ -21,12 +26,20 @@
             <!-- Iconos de redes sociales-->
             <x-social-media />
             <!-- Logo -->
-            <img src="{{ asset('images/chocolates_logo.png') }}" alt="Logo de Chocolates" loading="lazy" class="w-30 h-auto">
+            <img src="{{ asset('images/chocolates_logo.png') }}" alt="Logo de Chocolates" class="w-30 h-auto">
             <!-- Menú de búsqueda y carrito de compras-->
             <div class="hidden md:flex items-center gap-4">
+                <!-- Formulario de búsqueda -->
                 <x-form.search-input />
-                <a href="{{ route('carrito.index') }}"><i class="fa-solid fa-cart-shopping text-2xl text-rosa hover-icono hover:opacity-80 "></i></a>
-                
+                <!-- Productos en el carrito -->
+                <a href="{{ route('carrito.index') }}" class="relative inline-block">
+                    <i class="fa-solid fa-cart-shopping text-2xl text-rosa hover-icono hover:opacity-80"></i>
+                    @if($totalProductosCarrito > 0)
+                    <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {{ $totalProductosCarrito }}
+                    </span>
+                    @endif
+                </a>
             </div>
         </div>
         <!-- Menú de navegación -->
@@ -52,7 +65,7 @@
         </div>
     </main>
 
-    
+
     {{-- Pie de página --}}
     <footer class="bg-lavanda text-center py-4">
         <a href="#">&copy; {{ date('Y') }} Chocolates. Todos los derechos reservados.</a>

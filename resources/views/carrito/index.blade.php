@@ -10,31 +10,43 @@
             <table class="w-full border-collapse">
                 <thead>
                     <tr class="bg-gray-100">
-                        <th class="text-left p-2 border-b">Producto</th>
-                        <th class="text-left p-2 border-b">Precio</th>
-                        <th class="text-left p-2 border-b">Cantidad</th>
-                        <th class="text-left p-2 border-b">Subtotal</th>
+                        <th class="text-center p-2 border">Producto</th>
+                        <th class="text-center p-2 border">Precio</th>
+                        <th class="text-center p-2 border">Cantidad</th>
+                        <th class="text-center p-2 border">Acciones</th>
+                        <th class="text-center p-2 border">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php $total = 0; @endphp
                     @foreach($carrito as $item)
-                        @php
-                            $subtotal = $item['precio'] * $item['cantidad'];
-                            $total += $subtotal;
-                        @endphp
-                        <tr class="border-b">
-                            <td class="p-2">{{ $item['nombre'] }}</td>
-                            <td class="p-2">${{ number_format($item['precio'], 2) }}</td>
-                            <td class="p-2">{{ $item['cantidad'] }}</td>
-                            <td class="p-2">${{ number_format($subtotal, 2) }}</td>
-                        </tr>
+                    @php
+                    $subtotal = $item['precio'] * $item['cantidad'];
+                    $total += $subtotal;
+                    @endphp
+                    <tr class="border">
+                        <td class="p-2 border text-center">{{ $item['nombre'] }}</td>
+                        <td class="p-2 border text-center">${{ number_format($item['precio'], 2) }}</td>
+                        <td class="p-2 border text-center">{{ $item['cantidad'] }}</td>
+                        <td class="p-2 border text-center">
+                            <form action="{{ route('carrito.agregar') }}" method="POST" style="display:inline">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $item['id'] }}">
+                                <button type="submit" class="bg-blue-500 text-white font-bold px-4 py-2 rounded-2xl hover:bg-blue-600">+</button>
+                            </form>
+                            <form action="{{ route('carrito.eliminarUnidad', $item['id']) }}" method="POST" style="display:inline">
+                                @csrf
+                                <button type="submit" class="bg-red-500 text-white font-bold px-4 py-2 rounded-2xl hover:bg-red-600">−</button>
+                            </form>
+                        </td>
+                        <td class="p-2 text-center">${{ number_format($subtotal, 2) }}</td>
+                    </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr class="bg-gray-100 font-semibold">
-                        <td colspan="3" class="p-2 text-right">Total:</td>
-                        <td class="p-2">${{ number_format($total, 2) }}</td>
+                        <td colspan="4" class="p-2 text-right">Total:</td>
+                        <td class="p-2 text-center">${{ number_format($total, 2) }}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -48,3 +60,4 @@
         @endif
     </div>
 </x-layout>
+

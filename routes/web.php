@@ -29,6 +29,9 @@ Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.
 
 Route::post('/carrito/agregar', [CarritoController::class, 'agregarAlCarrito'])->name('carrito.agregar');
 
+Route::post('/carrito/eliminar-unidad/{id}', [CarritoController::class, 'eliminarUnidadDelCarrito'])->name('carrito.eliminarUnidad');
+
+
 Route::get('/checkout', [CarritoController::class, 'checkoutForm'])->name('checkout.form');
 
 Route::post('/checkout/enviar', [CarritoController::class, 'checkoutEnviar'])->name('checkout.enviar');
