@@ -28,6 +28,24 @@ class CarritoController extends Controller
         return redirect()->back()->with('success', 'Producto agregado al carrito');
     }
 
+    public function eliminarUnidadDelCarrito($id)
+    {
+        $carrito = session()->get('carrito', []);
+
+        if (isset($carrito[$id])) {
+            $carrito[$id]['cantidad']--;
+
+            if ($carrito[$id]['cantidad'] <= 0) {
+                unset($carrito[$id]); // Elimina el producto si ya no queda ninguno
+            }
+
+            session(['carrito' => $carrito]);
+        }
+
+        return redirect()->back()->with('success', 'Producto actualizado');
+    }
+	
+
 
     public function verCarrito()
     {
