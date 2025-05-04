@@ -98,7 +98,7 @@ class CarritoController extends Controller
         $mensaje .= "\n✨ ¡Gracias por tu pedido! Te confirmaremos en breve.";
 
         // URL de WhatsApp
-        $numero = '50378232075';
+        $numero = '50373244526';
         $url = "https://wa.me/{$numero}?text=" . rawurlencode($mensaje);
 
 

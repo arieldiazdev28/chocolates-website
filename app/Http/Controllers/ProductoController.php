@@ -14,4 +14,10 @@ class ProductoController extends Controller
 
         return view('productos.index', ['productos' => $productos]);
     }
+
+    public function show($id){
+        //Muestra la información de un producto específico
+        $producto = Producto::findOrFail($id);
+        return view('productos.show', ['producto' => $producto]);
+    }
 }

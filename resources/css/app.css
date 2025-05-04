@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300..700&display=swap');
 @import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -9,6 +10,8 @@
     --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+    --font-pacifico:"Pacifico", cursive;
+    --font-quicksand:"Quicksand";
 
     /* Paleta de colores del proyecto */
     --color-rosa: #f280ca;
@@ -16,6 +19,13 @@
     --color-aqua: #acebf2;
     --color-dorado: #f2aa52;
     --color-grisClaro: #f2f2f2;
+}
+
+@layer base {
+    h2 {
+        font-size: 2.5rem;
+    }
+
 }
 
 @layer components {
@@ -27,6 +37,17 @@
         @apply flex justify-center items-center w-8 h-8 bg-lavanda rounded-full hover:bg-rosa;
     }
 
+    .btn-carrito {
+        @apply font-semibold py-2 rounded-xl text-center  cursor-pointer;
+    }
+
+    .bordes-tabla-carrito {
+        @apply border-3 border-rosa;
+    }
+
+    .btn-tabla-carrito {
+        @apply w-10 h-10 bg-rosa text-white border-4 border-rosa text-2xl font-bold rounded-full hover:bg-white hover:text-rosa cursor-pointer;
+    }
 }
 
 @layer utilities {

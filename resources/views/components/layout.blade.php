@@ -7,6 +7,7 @@
     <title>Chocolates | {{ $title ?? 'Home' }}</title>
     {{-- Importar Tailwind --}}
     @vite('resources/css/app.css')
+   
     {{-- Importar el archivo de notificaciones personalizadas --}}
     @vite('resources/css/notifications.css')
     {{-- Importar Alpine.js --}}
@@ -35,7 +36,7 @@
                 <a href="{{ route('carrito.index') }}" class="relative inline-block">
                     <i class="fa-solid fa-cart-shopping text-2xl text-rosa hover-icono hover:opacity-80"></i>
                     @if($totalProductosCarrito > 0)
-                    <span class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    <span class="absolute -top-2 -right-2 bg-pink-600 text-white font-quicksand text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                         {{ $totalProductosCarrito }}
                     </span>
                     @endif
@@ -60,7 +61,7 @@
 
     {{-- Contenedor donde se muestra el contenido dinámico de la página web --}}
     <main class="flex-1">
-        <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="max-w-7xl mx-auto px-4">
             {{ $slot }}
         </div>
     </main>

@@ -17,11 +17,13 @@
 
         </script>
         @endif
-    <div class="max-w-7xl mx-auto px-4 py-6">
-        <h2 class="text-2xl text-center font-bold mb-6">
-            Catálogo de Productos
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="py-6 font-quicksand font-[400] text-[2.4rem] text-center">
+            En <span class="font-pacifico">Chocolates</span>, creamos experiencias irresistibles con los
+            mejores ingredientes... ¡Descubre lo que tenemos para tí!
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach($productos as $producto)
             <x-producto-card :producto="$producto" />
             @endforeach

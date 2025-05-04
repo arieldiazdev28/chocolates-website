@@ -10,6 +10,8 @@ Route::get('/', function () {
 
 Route::get('/catalogo', [ProductoController::class, 'index'])->name('productos.index');
 
+Route::get('/catalogo/{id}', [ProductoController::class, 'show'])->name('catalogo.show');
+
 Route::get('/nosotros', function () {
     return view('nosotros.index');
 })->name('nosotros.index');
