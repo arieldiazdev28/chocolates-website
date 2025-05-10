@@ -8,6 +8,10 @@
     {{-- Importar Tailwind --}}
     @vite('resources/css/app.css')
    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+
     {{-- Importar el archivo de notificaciones personalizadas --}}
     @vite('resources/css/notifications.css')
     {{-- Importar Alpine.js --}}
@@ -66,11 +70,41 @@
         </div>
     </main>
 
+    <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        new Swiper(".swiper", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 4 }
+            },
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev"
+            }
+        });
+    });
+</script>
+
 
     {{-- Pie de página --}}
     <footer class="bg-lavanda text-center py-4">
         <a href="#">&copy; {{ date('Y') }} Chocolates. Todos los derechos reservados.</a>
     </footer>
+
+
 </body>
 </html>
 
