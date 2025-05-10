@@ -37,13 +37,11 @@
     <!-- Swiper -->
     <div class="swiper w-full px-8">
         <div class="swiper-wrapper">
-            @for ($i = 1; $i <= 8; $i++)
+            @foreach ($productosRandom as $producto)
                 <div class="swiper-slide">
-                    <div class="bg-lavanda rounded-lg p-6 shadow-md flex items-center justify-center text-lg font-semibold text-gray-700 min-h-[120px]">
-                        Producto {{ $i }}
-                    </div>
+                    <x-producto-card :producto="$producto" />
                 </div>
-            @endfor
+            @endforeach
         </div>
 
         <!-- Controles -->
@@ -52,11 +50,12 @@
         <div class="swiper-pagination mt-4"></div>
     </div>
 
-    <!-- Botón Catálogo -->
 
+    <!-- Botón Catálogo -->
+        <a href="{{ route('productos.index') }}">
         <button class="mt-10 px-8 py-3 bg-rosa text-white rounded-full hover:bg-pink-500 transition">
             Ver Catálogo
-        </button>
+        </button></a>
     
 </section>
 
