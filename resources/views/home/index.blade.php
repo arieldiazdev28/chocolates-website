@@ -33,15 +33,14 @@
             Desliza y descubre nuestros productos...
         </p>
 
-        <!-- Swiper -->
-        <div class="swiper w-full px-8">
-            <div class="swiper-wrapper">
-                @for ($i = 1; $i <= 8; $i++) <div class="swiper-slide">
-                    <div class="bg-lavanda rounded-lg p-6 shadow-md flex items-center justify-center text-lg font-semibold text-gray-700 min-h-[120px]">
-                        Producto {{ $i }}
-                    </div>
-            </div>
-            @endfor
+    <!-- Swiper -->
+    <div class="swiper w-full px-8">
+        <div class="swiper-wrapper">
+            @foreach ($productosRandom as $producto)
+                <div class="swiper-slide">
+                    <x-producto-card :producto="$producto" />
+                </div>
+            @endforeach
         </div>
 
         <!-- Controles -->
@@ -50,13 +49,13 @@
         <div class="swiper-pagination mt-4"></div>
         </div>
 
-        <!-- Botón Catálogo -->
 
+    <!-- Botón Catálogo -->
+        <a href="{{ route('productos.index') }}">
         <button class="mt-10 px-8 py-3 bg-rosa text-white rounded-full hover:bg-pink-500 transition">
-            <a href="{{ route('productos.index') }}">
-                Ver catálogo
-            </a>
-        </button>
-    </section>
+            Ver Catálogo
+        </button></a>
+    
+</section>
 </x-layout>
 

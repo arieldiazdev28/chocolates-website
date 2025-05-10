@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home.index');
-})->name('home.index');
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::get('/catalogo', [ProductoController::class, 'index'])->name('productos.index');
 
