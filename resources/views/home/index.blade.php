@@ -27,18 +27,39 @@
         <p class="text-3xl mt-4 leading-snug text-white">Nos encanta hacer chocolate y compartirlo contigo. <br>¿Listo para endulzar tu día?</p>
     </section>
 
-    <!-- Productos -->
-    <section class="bg-white py-10 text-center">
-        <div class="max-w-6xl mx-auto">
-            <p class="text-gray-700 mb-6 px-4">En Chocolates, creamos experiencias irresistibles con los mejores ingredientes. Descubre nuestros productos...</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-                @for ($i = 0; $i < 4; $i++)
-                    <div class="bg-lavanda rounded-lg p-4 shadow">
-                        <div class="h-32 bg-yellow-300 flex items-center justify-center mb-2">PRODUCTO</div>
+  <!-- Carrusel de Productos -->
+<section class="bg-white py-14 text-center relative">
+    <p class="text-gray-700 mb-6 px-4 text-xl">
+        En Chocolates, creamos experiencias irresistibles con los mejores ingredientes. 
+        Desliza y descubre nuestros productos...
+    </p>
+
+    <!-- Swiper -->
+    <div class="swiper w-full px-8">
+        <div class="swiper-wrapper">
+            @for ($i = 1; $i <= 8; $i++)
+                <div class="swiper-slide">
+                    <div class="bg-lavanda rounded-lg p-6 shadow-md flex items-center justify-center text-lg font-semibold text-gray-700 min-h-[120px]">
+                        Producto {{ $i }}
                     </div>
-                @endfor
-            </div>
+                </div>
+            @endfor
         </div>
-    </section>
+
+        <!-- Controles -->
+        <div class="swiper-button-next text-gray-600 hover:text-black"></div>
+        <div class="swiper-button-prev text-gray-600 hover:text-black"></div>
+        <div class="swiper-pagination mt-4"></div>
+    </div>
+
+    <!-- Botón Catálogo -->
+
+        <button class="mt-10 px-8 py-3 bg-rosa text-white rounded-full hover:bg-pink-500 transition">
+            Ver Catálogo
+        </button>
+    
+</section>
+
+
 
 </x-layout>
