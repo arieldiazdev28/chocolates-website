@@ -100,11 +100,11 @@
 
 
     {{-- Pie de página --}}
-    <footer class="bg-lavanda text-center py-4">
+    {{--<footer class="bg-lavanda text-center py-4">
         <a href="#">&copy; {{ date('Y') }} Chocolates. Todos los derechos reservados.</a>
-    </footer>
-
+    </footer>--}}
+    <x-footer.footer-site />
+    {{-- Fin del pie de página --}}
 
 </body>
 </html>
-
