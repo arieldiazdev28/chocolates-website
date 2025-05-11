@@ -33,7 +33,7 @@
             <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
             <li><a href="{{ route('nosotros.index') }}">NOSOTROS</a></li>
             <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-            <li><a href="{{ route('faq.index') }}">FAQ</a></li>
+            <li><a href="{{ route('faq.index') }}">PREGUNTAS FRECUENTES</a></li>
             <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
             <li><a href="{{ route('contacto.index') }}">CONTACTO</a></li>
         </ul>
