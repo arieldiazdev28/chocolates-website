@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Producto;
+use App\Models\Pedido;
 
 class CarritoController extends Controller
 {
@@ -36,7 +37,7 @@ class CarritoController extends Controller
             $carrito[$id]['cantidad']--;
 
             if ($carrito[$id]['cantidad'] <= 0) {
-                unset($carrito[$id]); // Elimina el producto si ya no queda ninguno
+                unset($carrito[$id]);
             }
 
             session(['carrito' => $carrito]);
@@ -44,8 +45,6 @@ class CarritoController extends Controller
 
         return redirect()->back()->with('success', 'Producto actualizado');
     }
-	
-
 
     public function verCarrito()
     {
@@ -72,14 +71,12 @@ class CarritoController extends Controller
             'comentarios' => 'nullable|string|max:500',
         ]);
 
-        //Obteniendo los datos desde el form
         $nombre = $request->input('nombre');
         $fecha = Carbon::parse($request->input('fecha'))->format('d/m/Y');
         $comentarios = $request->input('comentarios');
         $fechaActual = now()->format('d/m/Y H:i');
 
-        //Generando el mensaje de Whatsapp
-        $mensaje = "🍫 *¡Nuevo pedido desde la tienda en linea de Chocolates!* 🍫\n";
+        $mensaje = "🍫 *¡Nuevo pedido desde la tienda en línea de Chocolates!* 🍫\n";
         $mensaje .= "📅 *Fecha del pedido:* {$fechaActual}\n";
         $mensaje .= "👤 *Cliente:* $nombre\n";
         $mensaje .= "📦 *Productos solicitados:*\n";
@@ -87,39 +84,59 @@ class CarritoController extends Controller
         foreach ($carrito as $item) {
             $mensaje .= "• {$item['nombre']} x{$item['cantidad']} — $" . number_format($item['precio'], 2) . "\n";
         }
+
         $mensaje .= "\n🚚 *Entrega para:* $fecha\n";
-        $total = array_reduce($carrito, fn($carry, $item) => $carry + ($item['precio'] * $item['cantidad']), 0);
+        $total = $this->calcularTotal($carrito);
         $mensaje .= "💰 *Total a pagar:* $" . number_format($total, 2) . "\n";
 
         if ($comentarios) {
             $mensaje .= "\n📝 *Comentarios del cliente:*\n$comentarios\n";
         }
 
-        // URL de WhatsApp
         $numero = '50373244526';
         $url = "https://wa.me/{$numero}?text=" . rawurlencode($mensaje);
 
-
-        return view('checkout.preview', ['mensaje' => $mensaje, 'whatsapp_url' => $url]);
-    }
-
-    public function checkoutPreview(Request $request)
-    {
-        $mensaje = $request->input('mensaje');
-
-        return view('checkout.preview', ['mensaje' => $mensaje]);
+        return view('checkout.preview', [
+            'mensaje' => $mensaje,
+            'whatsapp_url' => $url,
+            'nombre' => $nombre,
+            'fecha' => $request->input('fecha'),
+            'comentarios' => $comentarios
+        ]);
     }
 
     public function checkoutConfirmar(Request $request)
     {
-        // Vaciar carrito
-        session()->forget('carrito');
+        $carrito = session('carrito', []);
 
-        // Redirigir a WhatsApp usando la URL guardada en sesión
-        if ($request->has('whatsapp_url')) {
-            return redirect()->away($request->input('whatsapp_url'));
+        if (empty($carrito)) {
+            return redirect()->route('carrito.index')->with('error', 'El carrito está vacío');
         }
 
-        return redirect()->route('carrito.index')->with('error', 'No se pudo confirmar el pedido.');
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'fecha_entrega' => 'required|date',
+            'comentarios' => 'nullable|string|max:500',
+            'whatsapp_url' => 'required|url',
+        ]);
+
+        Pedido::create([
+            'cliente' => $request->input('nombre'),
+            'productos' => json_encode($carrito),
+            'total' => $this->calcularTotal($carrito),
+            'fecha_entrega' => $request->input('fecha_entrega'),
+            'comentarios' => $request->input('comentarios'),
+        ]);
+
+        session()->forget('carrito');
+
+        return redirect()->away($request->input('whatsapp_url'));
+    }
+
+    private function calcularTotal($carrito)
+    {
+        return array_reduce($carrito, fn($total, $item) =>
+            $total + ($item['precio'] * $item['cantidad']), 0
+        );
     }
 }

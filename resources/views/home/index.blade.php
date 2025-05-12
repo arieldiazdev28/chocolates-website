@@ -57,5 +57,26 @@
         </button></a>
     
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+        if (localStorage.getItem('pedidoExitoso') === 'true') {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'middle',
+                showConfirmButton: false,
+                iconColor: 'success',
+                timer: 2000,
+                timerProgressBar: true
+            });
+
+            Toast.fire({
+                icon: 'success',
+                title: '¡Reservación enviada con éxito!'
+            });
+
+            localStorage.removeItem('pedidoExitoso');
+        }
+    });
+</script>
 </x-layout>
 

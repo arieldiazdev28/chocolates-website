@@ -11,7 +11,6 @@
                 ['pregunta' => '¿Hacen entregas a domicilio?', 'respuesta' => 'Sí, realizamos entregas a domicilio dentro del área metropolitana de San Salvador.'],
                 ['pregunta' => '¿Puedo personalizar los chocolates?', 'respuesta' => '¡Claro! Contamos con opciones de personalización para ocasiones especiales como cumpleaños, aniversarios o eventos corporativos.'],
                 ['pregunta' => '¿Tienen opciones veganas o sin azúcar?', 'respuesta' => 'Sí, ofrecemos una selección limitada de chocolates <strong>veganos</strong> y <strong>sin azúcar</strong> bajo pedido.'],
-                ['pregunta' => 'Contenido', 'respuesta' => '<strong>Contenido</strong>'],
             ] as $faq)
                 <div x-data="{ open: false }" class="border border-lavanda rounded-lg">
                     <!-- Buton contiene el color del texto de la pregunta, 

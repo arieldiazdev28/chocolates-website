@@ -13,11 +13,17 @@
 
             <form action="{{ route('checkout.confirmar') }}" method="POST">
                 @csrf
+                <input type="hidden" name="nombre" value="{{ $nombre }}">
+                <input type="hidden" name="fecha_entrega" value="{{ $fecha }}">
+                <input type="hidden" name="comentarios" value="{{ $comentarios }}">
                 <input type="hidden" name="whatsapp_url" value="{{ $whatsapp_url }}">
-                <button type="submit" class="bg-rosa hover:bg-pink-500 text-white font-bold px-4 py-2 rounded-2xl">
+
+                <button type="submit" class="bg-rosa hover:bg-pink-500 text-white font-bold px-4 py-2 rounded-2xl" onclick="localStorage.setItem('pedidoEnviado', 'true')">
                     Enviar <i class="fa-brands fa-whatsapp"></i>
                 </button>
             </form>
+
         </div>
     </div>
 </x-layout>
+
