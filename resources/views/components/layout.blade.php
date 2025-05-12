@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Chocolates | {{ $title ?? 'Home' }}</title>
     {{-- Importar Tailwind --}}
     @vite('resources/css/app.css')
-   
+
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 
@@ -26,17 +26,35 @@
 <body class="min-h-screen flex flex-col text-gray-900">
     {{-- Encabezado de la página web --}}
     <header class="bg-grisClaro">
-        <!-- Banner superior-->
+        <!-- Encabezado -->
         <div class="hidden md:flex items-center justify-between px-8 py-4">
-            <!-- Iconos de redes sociales-->
-            <x-social-media />
+
             <!-- Logo -->
-            <img src="{{ asset('images/chocolates_logo.png') }}" alt="Logo de Chocolates" class="w-30 h-auto">
-            <!-- Menú de búsqueda y carrito de compras-->
-            <div class="hidden md:flex items-center gap-4">
+            <div class="flex-shrink-0">
+                <a href="{{ route('home.index') }}">
+                    <img src="{{ asset('images/chocolates_logo.png') }}" alt="Logo de Chocolates" class="w-30 h-auto">
+                </a>
+            </div>
+
+            <!-- Menú de navegación -->
+            <nav class="flex-grow">
+                <ul class="flex justify-center items-center gap-3">
+                    <li><a href="{{ route('home.index') }}" class="{{ request()->routeIs('home.index') ? 'enlace-activo' : '' }}">HOME</a></li>
+                    <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
+                    <li><a href="{{ route('productos.index') }}" class="{{ request()->routeIs('productos.index') ? 'enlace-activo' : '' }}">CATÁLOGO</a></li>
+                    <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
+                    <li><a href="{{ route('nosotros.index') }}" class="{{ request()->routeIs('nosotros.index') ? 'enlace-activo' : '' }}">NOSOTROS</a></li>
+                    <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
+                    <li><a href="{{ route('faq.index') }}" class="{{ request()->routeIs('faq.index') ? 'enlace-activo' : '' }}">PREGUNTAS FRECUENTES</a></li>
+                </ul>
+            </nav>
+
+            <!-- Menú de búsqueda y carrito de compras -->
+            <div class="flex items-center gap-4">
                 <!-- Formulario de búsqueda -->
                 <x-form.search-input />
-                <!-- Productos en el carrito -->
+
+                <!-- Carrito -->
                 <a href="{{ route('carrito.index') }}" class="relative inline-block">
                     <i class="fa-solid fa-cart-shopping text-2xl text-rosa hover-icono hover:opacity-80"></i>
                     @if($totalProductosCarrito > 0)
@@ -46,21 +64,8 @@
                     @endif
                 </a>
             </div>
+
         </div>
-        <!-- Menú de navegación -->
-        <nav class="bg-grisClaro pb-2 hidden md:block">
-            <ul class="flex flex-col justify-center items-center gap-3 md:flex-row">
-                <li><a href="{{ route('home.index') }}" class="enlace-activo">HOME</a></li>
-                <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="{{ route('productos.index') }}">CATÁLOGO</a></li>
-                <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="{{ route('nosotros.index') }}">NOSOTROS</a></li>
-                <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="{{ route('faq.index') }}">FAQ</a></li>
-                <div class="bg-rosa h-2 w-2 rounded-full hidden md:block"></div>
-                <li><a href="{{ route('contacto.index') }}">CONTACTO</a></li>
-            </ul>
-        </nav>
     </header>
 
     {{-- Contenedor donde se muestra el contenido dinámico de la página web --}}
@@ -71,40 +76,39 @@
     </main>
 
     <!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        new Swiper(".swiper", {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            breakpoints: {
-                640: { slidesPerView: 2 },
-                1024: { slidesPerView: 4 }
-            },
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false
-            },
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev"
-            }
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            new Swiper(".swiper", {
+                slidesPerView: 1
+                , spaceBetween: 20
+                , loop: true
+                , breakpoints: {
+                    640: {
+                        slidesPerView: 2
+                    }
+                    , 1024: {
+                        slidesPerView: 4
+                    }
+                }
+                , autoplay: {
+                    delay: 3000
+                    , disableOnInteraction: false
+                }
+                , pagination: {
+                    el: ".swiper-pagination"
+                    , clickable: true
+                }
+                , navigation: {
+                    nextEl: ".swiper-button-next"
+                    , prevEl: ".swiper-button-prev"
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 
     {{-- Pie de página --}}
-    {{--<footer class="bg-lavanda text-center py-4">
-        <a href="#">&copy; {{ date('Y') }} Chocolates. Todos los derechos reservados.</a>
-    </footer>--}}
     <x-footer.footer-site />
-    {{-- Fin del pie de página --}}
-
 </body>
 </html>
